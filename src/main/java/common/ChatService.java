@@ -1,6 +1,5 @@
-package rmi;
+package common;
 
-import rmi.ChatClient;
 import common.model.Chat;
 import common.model.ChatMessage;
 import common.model.User;
@@ -21,7 +20,7 @@ public interface ChatService extends Remote {
     List<Chat> getUserChats(int userId) throws RemoteException;
 
     // Broadcast to all (used for public chatrooms)
-    void broadcastMessage(String message) throws RemoteException;
+    void broadcastMessage(ChatMessage message) throws RemoteException;
 
     // Client connection
     void registerClient(ChatClient client) throws RemoteException;

@@ -18,5 +18,27 @@ public class UserChat {
     @JoinColumn(name = "chat_id")
     private Chat chat;
 
-    // Getters and Setters
+    public Chat getChatId() {
+        return chat;
+    }
+
+    public void setChatId(Chat chat) {
+        this.chat = chat;
+    }
+
+    public User getUserId() {
+        return user;
+    }
+
+    public void setUserId(User user) {
+        this.user = user;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 }

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.Hyperlink?>
+
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="controller.RegisterController"
+      spacing="15"
+      alignment="CENTER"
+      style="-fx-background-color: #f4f4f4; -fx-padding: 30;">
+
+    <Label text="Create Account"
+           style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #333333;"/>
+
+    <VBox spacing="10" style="-fx-max-width: 300px;">
+        <TextField fx:id="usernameField"
+                   promptText="Username"
+                   style="-fx-background-color: white; -fx-border-color: #cccccc; -fx-border-radius: 5; -fx-padding: 8;"/>
+
+        <TextField fx:id="emailField"
+                       promptText="Email"
+                       style="-fx-background-color: white; -fx-border-color: #cccccc; -fx-border-radius: 5; -fx-padding: 8;"/>
+
+        <PasswordField fx:id="passwordField"
+                       promptText="Password"
+                       style="-fx-background-color: white; -fx-border-color: #cccccc; -fx-border-radius: 5; -fx-padding: 8;"/>
+
+        <TextField fx:id="nicknameField"
+                   promptText="Nickname"
+                   style="-fx-background-color: white; -fx-border-color: #cccccc; -fx-border-radius: 5; -fx-padding: 8;"/>
+
+        <Label fx:id="statusLabel"
+               text=""
+               textFill="#d32f2f"
+               style="-fx-font-size: 12px; -fx-padding: 5 0 0 0;"/>
+
+        <Button text="Sign Up"
+                onAction="#handleSignup"
+                style="-fx-background-color: #1976d2; -fx-text-fill: white; -fx-font-weight: bold; -fx-border-radius: 5; -fx-padding: 10;"
+                prefWidth="300"/>
+
+        <HBox alignment="CENTER">
+            <Hyperlink text="Already have an account? Login"
+                       onAction="#goToLogin"
+                       style="-fx-text-fill: #1976d2; -fx-font-size: 12px; -fx-padding: 10 0 0 0;"/>
+        </HBox>
+    </VBox>
+</VBox>
