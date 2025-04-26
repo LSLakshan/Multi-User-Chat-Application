@@ -10,6 +10,8 @@ import common.model.Chat;
 import common.model.ChatMessage;
 import common.model.User;
 import common.model.UserChat;
+import org.hibernate.Session;
+import util.HibernateUtil;
 
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
@@ -61,9 +63,13 @@ public class ChatServiceImpl extends UnicastRemoteObject implements ChatService 
 
     @Override
     public void sendMessage(ChatMessage message) throws RemoteException {
-        chatMessageDAO.saveMessage(message);
-        broadcastMessage(message); // now passing the full object
+        System.out.println("Sending message: " + message);
+        chatMessageDAO.saveMessage(message); // Let DAO handle everything
+        broadcastMessage(message);
     }
+
+
+
 
     @Override
     public List<ChatMessage> getMessagesByChatId(int chatId) throws RemoteException {

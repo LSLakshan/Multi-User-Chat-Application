@@ -1,5 +1,7 @@
 package controller;
 
+import common.ChatService;
+import common.model.Chat;
 import common.model.User;
 import common.dao.UserDAO;
 import javafx.fxml.FXML;
@@ -62,14 +64,26 @@ public class LoginController {
             Scene scene = new Scene(loader.load());
 
             ChatWindowController controller = loader.getController();
-            controller.setCurrentUser(user);
+            controller.setCurrentUser(user);  // Set user
+
+            // 🔥 Create a new chat for the user (for example, single user chat room)
+            var chatService = (ChatService) java.rmi.Naming.lookup("rmi://localhost:1099/ChatService");
+
+            // Start a chat with only this user
+            java.util.List<User> participants = new java.util.ArrayList<>();
+            participants.add(user);
+
+            Chat newChat = chatService.startChat(participants); // Create chat on server
+            controller.setCurrentChat(newChat); // Set chat into controller
 
             stage.setScene(scene);
             stage.setTitle("Chat - " + user.getNickname());
         } catch (Exception e) {
+            e.printStackTrace(); // for better debugging
             errorLabel.setText("Failed to load chat window.");
         }
     }
+
 
     private boolean isValidInput(String username, String password) {
         return username.length() >= 3 && username.length() <= 20 &&

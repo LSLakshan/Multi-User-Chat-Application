@@ -59,22 +59,40 @@ public class ChatWindowController {
     }
 
     private void sendMessage() {
+
+        System.out.println("button clicked");
+
         String messageText = messageTextField.getText().trim();
+
+        System.out.println("Message text: " + messageText);
+        System.out.println("Current User: " + currentUser);
+        System.out.println("Current Chat: " + currentChat);
+
         if (!messageText.isEmpty() && currentUser != null && currentChat != null) {
             ChatMessage message = new ChatMessage();
-            message.setSender(currentUser);  // Ensure sender is persisted in DB
-            message.setChat(currentChat);    // Ensure chat is persisted if needed
             message.setContent(messageText);
             message.setTimestamp(LocalDateTime.now());
 
+            // Set only IDs, not whole objects (attach them manually)
+            User senderRef = new User();
+            senderRef.setId(currentUser.getId());
+            message.setSender(senderRef);
+
+            Chat chatRef = new Chat();
+            chatRef.setId(currentChat.getId());
+            message.setChat(chatRef);
+
             try {
-                chatService.sendMessage(message); // Send message to RMI service
-                messageTextField.clear(); // Clear message text field after sending
+                chatService.sendMessage(message); // Send to server
+                //addMessage(message);              // Display immediately
+                messageTextField.clear();          // Clear textbox
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
     }
+
+
 
     public void addMessage(ChatMessage message) {
         Platform.runLater(() -> {
